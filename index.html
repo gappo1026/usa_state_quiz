@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>USA State Shape Quiz | Free 50-State Geography Game</title>
+    <meta
+      name="description"
+      content="Play a free USA state shape quiz. Guess all 50 states from their outlines in a fast 10-question round. Learn geography with instant feedback."
+    />
+    <meta name="keywords" content="USA quiz, US states quiz, geography game, state shapes, 50 states" />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:title" content="USA State Shape Quiz" />
+    <meta
+      property="og:description"
+      content="Identify U.S. states from their shapes. Free 10-question rounds covering all 50 states."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="USA State Shape Quiz" />
+    <meta
+      name="twitter:description"
+      content="A free browser quiz: match state outlines to their names."
+    />
+    <link rel="canonical" href="./index.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="./index.html">
+        <span class="brand-mark">USA State Quiz</span>
+        <span class="brand-tag">Learn the 50 states by shape</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="./index.html" aria-current="page">Quiz</a>
+        <a href="./about.html">About</a>
+        <a href="./privacy.html">Privacy</a>
+        <a href="./operator.html">Operator</a>
+      </nav>
+    </header>
+
+    <main id="main" class="page">
+      <section id="start-screen" class="hero-panel" aria-labelledby="hero-title">
+        <p class="eyebrow">Fast · Visual · Free</p>
+        <h1 id="hero-title">Can you name the state from its shape?</h1>
+        <p>
+          Race through 10 random states, get instant feedback, and see where each one sits on the
+          U.S. map.
+        </p>
+        <div class="cta-row">
+          <button id="start-btn" class="btn btn-primary" type="button">Start quiz</button>
+          <a class="btn btn-secondary" href="./about.html">How it works</a>
+        </div>
+      </section>
+
+      <section id="quiz-screen" class="quiz-shell hidden" aria-live="polite">
+        <div class="hud" role="group" aria-label="Quiz progress">
+          <div class="hud-main">
+            <div class="hud-item hud-item--question">
+              <span class="hud-label">Question</span>
+              <strong id="progress-label">1 / 10</strong>
+            </div>
+            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" aria-labelledby="progress-label">
+              <div id="progress-fill" class="progress-fill"></div>
+            </div>
+          </div>
+          <div class="hud-meters">
+            <div class="hud-item hud-item--score" id="score-hud">
+              <span class="hud-label">Score</span>
+              <strong class="score-value">
+                <span class="score-viewport">
+                  <span id="score-label" class="score-roller">0</span>
+                </span>
+              </strong>
+            </div>
+            <div class="hud-item hud-item--streak" id="streak-hud">
+              <span class="hud-label">Streak</span>
+              <strong id="streak-label" class="streak-value">
+                <span class="streak-flame" aria-hidden="true">✦</span>
+                <span id="streak-num">0</span>
+              </strong>
+            </div>
+          </div>
+        </div>
+
+        <div id="quiz-panel" class="quiz-panel">
+          <div class="quiz-layout">
+            <div id="stage-card" class="stage-card" aria-live="polite">
+              <div class="stage-inner">
+                <div class="stage-face stage-face--question shape-stage" id="shape-mount" aria-label="State outline"></div>
+                <div class="stage-face stage-face--answer" id="answer-stage" aria-hidden="true">
+                  <div class="answer-stage-top">
+                    <div id="stage-badge" class="feedback-badge" aria-hidden="true"></div>
+                    <div class="answer-heading">
+                      <p id="stage-kicker" class="answer-kicker"></p>
+                      <h3 id="stage-answer-name" class="answer-name"></h3>
+                      <p id="stage-region" class="answer-region"></p>
+                      <div class="answer-highlights">
+                        <div class="answer-chip">
+                          <span class="answer-chip-label">Capital</span>
+                          <strong id="stage-capital" class="answer-chip-value"></strong>
+                        </div>
+                        <div class="answer-chip answer-chip--abbr">
+                          <span class="answer-chip-label">Abbr</span>
+                          <strong id="stage-abbr" class="answer-chip-value"></strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <p id="stage-fact" class="answer-fact"></p>
+                  <div class="locator-wrap locator-wrap--stage">
+                    <div id="locator-map" class="locator-map" aria-label="U.S. map highlighting the state"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="question-copy">
+              <div class="question-head" id="question-head">
+                <h2 id="question-title">Which state is this?</h2>
+                <p id="question-hint">Tap one of the four answers below.</p>
+              </div>
+              <div id="choices" class="choices" role="group" aria-label="Answer choices"></div>
+              <div id="next-wrap" class="next-wrap hidden">
+                <button id="next-btn" class="btn btn-primary next-btn" type="button" disabled>
+                  <span class="next-btn-label">Next</span>
+                  <span class="next-btn-arrow" aria-hidden="true">→</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="float-toast" class="float-toast hidden" aria-live="assertive"></div>
+        <div id="fx-layer" class="fx-layer" aria-hidden="true"></div>
+
+        <aside class="ad-slot" aria-label="Advertisement placeholder">
+          <span>Advertisement</span>
+          Ad space reserved. Google AdSense code will be added after approval.
+        </aside>
+      </section>
+
+      <section id="result-screen" class="result-panel hidden" aria-labelledby="result-title">
+        <div id="confetti-layer" class="confetti-layer" aria-hidden="true"></div>
+        <div class="result-burst" aria-hidden="true"></div>
+        <div id="score-ring" class="score-ring">
+          <span id="result-score">0 / 10</span>
+        </div>
+        <p id="result-badge" class="result-badge">Nice run</p>
+        <h2 id="result-title">Round complete</h2>
+        <p id="result-message">Nice work.</p>
+        <div class="result-stats">
+          <div>
+            <span>Correct</span>
+            <strong id="stat-correct">0</strong>
+          </div>
+          <div>
+            <span>Best streak</span>
+            <strong id="stat-streak">0</strong>
+          </div>
+          <div>
+            <span>Accuracy</span>
+            <strong id="stat-accuracy">0%</strong>
+          </div>
+        </div>
+        <div class="cta-row result-cta">
+          <button id="retry-btn" class="btn btn-primary" type="button">Play again</button>
+          <button id="share-btn" class="btn btn-secondary" type="button">Share score</button>
+        </div>
+        <div class="share-box">
+          <label for="share-text"><strong>Share text</strong></label>
+          <textarea id="share-text" readonly></textarea>
+          <button id="copy-btn" class="btn btn-secondary" type="button">Copy text</button>
+        </div>
+        <aside class="ad-slot ad-slot--footer" aria-label="Advertisement placeholder">
+          <span>Advertisement</span>
+          Ad space reserved below results so it does not block quiz choices.
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="./about.html">About</a>
+        <a href="./privacy.html">Privacy Policy</a>
+        <a href="./operator.html">Operator Info</a>
+      </nav>
+      <p>Free educational quiz. State outlines derived from Natural Earth public-domain data.</p>
+    </footer>
+
+    <script src="./js/states-data.js"></script>
+    <script src="./js/quiz.js"></script>
+  </body>
+</html>
