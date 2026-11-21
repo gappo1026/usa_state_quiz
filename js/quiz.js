@@ -5,10 +5,8 @@
   var CHOICES_PER_QUESTION = 4;
   var MORPH_MS = 800;
 
-  var startScreen = document.getElementById("start-screen");
   var quizScreen = document.getElementById("quiz-screen");
   var resultScreen = document.getElementById("result-screen");
-  var startBtn = document.getElementById("start-btn");
   var nextBtn = document.getElementById("next-btn");
   var nextWrap = document.getElementById("next-wrap");
   var retryBtn = document.getElementById("retry-btn");
@@ -525,7 +523,6 @@
   }
 
   function showScreen(screen) {
-    startScreen.classList.add("hidden");
     quizScreen.classList.add("hidden");
     resultScreen.classList.add("hidden");
     screen.classList.remove("hidden");
@@ -914,16 +911,17 @@
 
   function init() {
     if (states.length !== 50) {
-      startBtn.disabled = true;
-      startBtn.textContent = "State data failed to load";
       console.error("Expected 50 states, found", states.length);
+      if (quizScreen) {
+        quizScreen.innerHTML =
+          '<p class="note" role="alert">State data failed to load. Please refresh the page.</p>';
+      }
       return;
     }
     if (!usMap || usMap.paths.length !== 50) {
       console.warn("US_MAP missing or incomplete; locator map may be unavailable.");
     }
 
-    startBtn.addEventListener("click", startQuiz);
     nextBtn.addEventListener("click", goNext);
     retryBtn.addEventListener("click", startQuiz);
     shareBtn.addEventListener("click", function () {
@@ -932,6 +930,8 @@
     copyBtn.addEventListener("click", function () {
       copyScore();
     });
+
+    startQuiz();
   }
 
   if (document.readyState === "loading") {
